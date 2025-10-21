@@ -34,7 +34,7 @@ public class ArvoreBi{
 		imprimirEmOrdermRecursivo(this.raiz);
 		System.out.println();
 	}
-	private void imprimirEmOrdermRecursivo(No atual){
+	private void imprimirEmOrdermRecursivo(No noAtual){
 		if(noAtual == null){
 			return;
 		}
