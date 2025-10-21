@@ -29,10 +29,33 @@ public class ArvoreBi{
 		}
 		return noAtual;
 	}
+	public void imprimirEmOrderm(){
+		System.out.println("Imprimindo em ordem crescente:");
+		imprimirEmOrdermRecursivo(this.raiz);
+		System.out.println();
+	}
+	private void imprimirEmOrdermRecursivo(No atual){
+		if(noAtual == null){
+			return;
+		}
+		imprimirEmOrdermRecursivo(noAtual.esquerda);
+		System.out.print(noAtual.info + " ");
+		imprimirEmOrdermRecursivo(noAtual.direita);
+	}
 }
 public class Main
 {
 	public static void main(String[] args) {
 		System.out.println("Hello World");
+		ArvoreBi minhaArvore = new ArvoreBi();
+
+		minhaArvore.inserir(50);
+		minhaArvore.inserir(30);
+		minhaArvore.inserir(70);
+		minhaArvore.inserir(20);
+		minhaArvore.inserir(40);
+		minhaArvore.inserir(60);
+		minhaArvore.inserir(80);
+		minhaArvore.imprimirEmOrderm();
 	}
 }
