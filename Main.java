@@ -1,16 +1,19 @@
 public class Main
 {
 	public static void main(String[] args) {
-		System.out.println("Hello World");
-		ArvoreBi minhaArvore = new ArvoreBi();
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Escolha o tipo de Arvore:");
+		System.out.println("(1) Árvore AVL");
+		System.out.println("(2) Árvore Rubro-Negra");
+		int escolha = scanner.nextInt();
+		IArvore minhaArvore;
+		if(escolha == 1){
+			minhaArvore = new ArvoreAVL();
+			System.out.println("Árvore AVL criada.");
+		} else {
+			minhaArvore = new ArvoreRubroNegra();
+			System.out.println("Árvore Rubro-Negra criada.");
+		}
 
-		minhaArvore.inserir(50);
-		minhaArvore.inserir(30);
-		minhaArvore.inserir(70);
-		minhaArvore.inserir(20);
-		minhaArvore.inserir(40);
-		minhaArvore.inserir(60);
-		minhaArvore.inserir(80);
-		minhaArvore.imprimirEmOrderm();
 	}
 }
