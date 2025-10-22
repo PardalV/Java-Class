@@ -40,7 +40,6 @@ public class ArvoreAVL implements IArvore{
 
     //Rotações 
     public NoAVL rotacaoDireita(NoAVL y){
-
         NoAVL x = y.esquerda;
         NoAVL k = x.direita;
         x.direita = y;
