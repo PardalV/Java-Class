@@ -9,7 +9,7 @@ public class No{
 	}
 }
 
-public class ArvoreBi{
+class ArvoreBi{
 	private No raiz;
 	public ArvoreBi(){
 		this.raiz = null;
