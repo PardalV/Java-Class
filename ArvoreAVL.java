@@ -140,6 +140,13 @@ public class ArvoreAVL implements IArvore{
         }
         return noAtual;
     }
+    private NoAVL encontrarMenorValor(NoAVL no){
+        NoAVL atual = no;
+        while(atual.esquerda != null){
+            atual = atual.esquerda;
+        }
+        return atual;
+    }
 }
 
 class NoAVL{
