@@ -20,7 +20,7 @@ public class ArvoreAVL implements IArvore{
         if(this.raiz == null){
             System.out.println("[ÁRVORE VAZIA]");
         } else {
-            imprimirEmOrdermRecursivo(this.raiz);
+            imprimirEstruturaRecursivo(this.raiz, "", true);
         }
         System.out.println("\n-----------------------------------------");
         
@@ -161,6 +161,25 @@ public class ArvoreAVL implements IArvore{
         imprimirEmOrdermRecursivo(noAtual.esquerda);
         System.out.print(noAtual.info + " ");
         imprimirEmOrdermRecursivo(noAtual.direita);
+    }
+    private void imprimirEstruturaRecursivo(NoAVL no, String indent, boolean isUltimo) {
+   
+        if (no == null) {
+            return;
+        }
+        int h = no.altura; 
+        int fb = getFatorBalanceamento(no); 
+        System.out.print(indent);
+        if (isUltimo) {
+            System.out.print("└── ");
+            indent += "    "; 
+        } else {
+            System.out.print("├── ");
+            indent += "│   "; 
+        }
+        System.out.println(no.info + " (h:" + h + ", fb:" + fb + ")");
+        imprimirEstruturaRecursivo(no.esquerda, indent, false);
+        imprimirEstruturaRecursivo(no.direita, indent, true);
     }
 }
 
