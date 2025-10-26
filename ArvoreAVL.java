@@ -4,7 +4,7 @@ public class ArvoreAVL implements IArvore{
     //Metodos que precisam de Override
     @Override
     public void inserir(int valor){
-        raiz = inserirRecursivo(NoAVL noAtual, int valor);
+        raiz = inserirRecursivo(raiz, valor);
     }
     @Override
     public void remover(int valor){
@@ -17,7 +17,7 @@ public class ArvoreAVL implements IArvore{
     @Override
     public void imprimir(){
         System.out.println("--- Árvore AVL (Impressão em-ordem) ---");
-        if(this.raiz = null){
+        if(this.raiz == null){
             System.out.println("[ÁRVORE VAZIA]");
         } else {
             imprimirEmOrdermRecursivo(this.raiz);
@@ -156,7 +156,7 @@ public class ArvoreAVL implements IArvore{
     }
     private void imprimirEmOrdermRecursivo(NoAVL noAtual){
         if(noAtual == null){
-            return
+            return;
         }
         imprimirEmOrdermRecursivo(noAtual.esquerda);
         System.out.print(noAtual.info + " ");
