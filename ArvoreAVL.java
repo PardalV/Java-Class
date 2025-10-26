@@ -4,7 +4,7 @@ public class ArvoreAVL implements IArvore{
     //Metodos que precisam de Override
     @Override
     public void inserir(int valor){
-
+        raiz = inserirRecursivo(NoAVL noAtual, int valor);
     }
     @Override
     public void remover(int valor){
@@ -56,6 +56,29 @@ public class ArvoreAVL implements IArvore{
         atualizarAltura(x);
         atualizarAltura(y);
         return y;
+    }
+    private NoAVL inserirRecursivo(NoAVL noAtual, int valor){
+        if(noAtual == null){
+            NoAVL rec = new NoAVL(valor);
+            return rec;
+        } else if(valor < noAtual.info){
+            noAtual.esquerda = inserirRecursivo(noAtual.esquerda, valor);
+        } else if (valor > noAtual.info){
+            noAtual.direita = inserirRecursivo(noAtual.direita, valor);
+        }
+        atualizarAltura(noAtual);
+        int fb = getFatorBalanceamento(noAtual);
+        if(fb > 1){
+            if(valor < noAtual.esquerda.info){
+                return rotacaoDireita(noAtual);
+            } else if (valor > noAtual.esquerda.info){
+                noAtual.esquerda = rotacaoDireita(noAtual.esquerda);
+                return rotacaoDireita(noAtual);
+            }
+        } else if(fb < -1){
+            
+        }
+
     }
 }
 
