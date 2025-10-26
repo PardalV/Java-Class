@@ -16,6 +16,13 @@ public class ArvoreAVL implements IArvore{
     }
     @Override
     public void imprimir(){
+        System.out.println("--- Árvore AVL (Impressão em-ordem) ---");
+        if(this.raiz = null){
+            System.out.println("[ÁRVORE VAZIA]");
+        } else {
+            imprimirEmOrdermRecursivo(this.raiz);
+        }
+        System.out.println("\n-----------------------------------------");
         
     }
 
@@ -146,6 +153,14 @@ public class ArvoreAVL implements IArvore{
             atual = atual.esquerda;
         }
         return atual;
+    }
+    private void imprimirEmOrdermRecursivo(NoAVL noAtual){
+        if(noAtual == null){
+            return
+        }
+        imprimirEmOrdermRecursivo(noAtual.esquerda);
+        System.out.print(noAtual.info + " ");
+        imprimirEmOrdermRecursivo(noAtual.direita);
     }
 }
 
