@@ -8,11 +8,11 @@ public class ArvoreAVL implements IArvore{
     }
     @Override
     public void remover(int valor){
-
+        this.raiz = removerRecursivo(this.raiz, valor);
     }
     @Override
     public boolean buscar(int valor){
-
+        return buscarRecursivo(this.raiz, valor);
     }
     @Override
     public void imprimir(){
@@ -61,10 +61,13 @@ public class ArvoreAVL implements IArvore{
         if(noAtual == null){
             NoAVL rec = new NoAVL(valor);
             return rec;
-        } else if(valor < noAtual.info){
+        } 
+        if(valor < noAtual.info){
             noAtual.esquerda = inserirRecursivo(noAtual.esquerda, valor);
         } else if (valor > noAtual.info){
             noAtual.direita = inserirRecursivo(noAtual.direita, valor);
+        } else {
+            return noAtual;
         }
         atualizarAltura(noAtual);
         int fb = getFatorBalanceamento(noAtual);
@@ -72,13 +75,70 @@ public class ArvoreAVL implements IArvore{
             if(valor < noAtual.esquerda.info){
                 return rotacaoDireita(noAtual);
             } else if (valor > noAtual.esquerda.info){
-                noAtual.esquerda = rotacaoDireita(noAtual.esquerda);
+                noAtual.esquerda = rotacaoEsquerda(noAtual.esquerda);
                 return rotacaoDireita(noAtual);
             }
         } else if(fb < -1){
-            
+            if(valor > noAtual.direita.info){
+                return rotacaoEsquerda(noAtual);
+            } else if(valor < noAtual.direita.info){
+                noAtual.direita = rotacaoDireita(noAtual.direita);
+                return rotacaoEsquerda(noAtual);
+            }
         }
+        return noAtual;
 
+    }
+    private boolean buscarRecursivo(NoAVL noAtual, int valor){
+        if(noAtual == null){
+            return false;
+        }
+        if(valor == noAtual.info){
+            return true;
+        }
+        if(valor < noAtual.info){
+            return buscarRecursivo(noAtual.esquerda, valor);
+        } else {
+            return buscarRecursivo(noAtual.direita, valor);
+        }
+    }
+    private NoAVL removerRecursivo(NoAVL noAtual, int valor){
+        if(noAtual == null){
+            return noAtual;
+        }
+        if(valor < noAtual.info){
+            noAtual.esquerda = removerRecursivo(noAtual.esquerda, valor);
+        } else if(valor > noAtual.info){
+            noAtual.direita = removerRecursivo(noAtual.direita, valor);
+        } else {
+            if(noAtual.esquerda == null){
+                return noAtual.direita;
+            } else if(noAtual.direita == null){
+                return noAtual.esquerda;
+            }
+            NoAVL sucessor = encontrarMenorValor(noAtual.direita);
+            noAtual.info = sucessor.info;
+            noAtual.direita = removerRecursivo(noAtual.direita, sucessor.info);
+        }
+        atualizarAltura(noAtual);
+        int fb = getFatorBalanceamento(noAtual);
+        if(fb > 1){
+            if(getFatorBalanceamento(noAtual.esquerda) >= 0){
+                return rotacaoDireita(noAtual);
+            } else {
+                noAtual.esquerda = rotacaoEsquerda(noAtual.esquerda);
+                return rotacaoDireita(noAtual);
+            }
+        }
+        if (fb < -1){
+            if(getFatorBalanceamento(noAtual.direita) <= 0){
+                return rotacaoEsquerda(noAtual);
+            } else {
+                noAtual.direita = rotacaoDireita(noAtual.direita);
+                return rotacaoEsquerda(noAtual);
+            }
+        }
+        return noAtual;
     }
 }
 
